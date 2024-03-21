@@ -6,19 +6,18 @@ import plotly.express as px
 import json
 import requests
 from PIL import Image
-import sys
-sys.setrecursionlimit(10000)
+
 
 
 
 #Dataframe creation
 
 #Sql connection
-myconnection=psycopg2.connect(host="localhost",
-                              user="postgres",
-                              password="0726",
-                              database="phonepe_data",
-                              port="5432")
+myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
 cursor=myconnection.cursor()
 
@@ -368,11 +367,11 @@ def top_user_plot_2(df, state):
 
 #sql plot1 
 def top_chart_trans_amount(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                                  user=" ",
+                                  password=" ",
+                                  database=" ",
+                                  port=" ")
 
     cursor=myconnection.cursor()
     #plot1
@@ -428,11 +427,11 @@ def top_chart_trans_amount(table_name):
 
 #sql plot2
 def top_chart_trans_count(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+   myconnection=psycopg2.connect(host=" ",
+                                  user=" ",
+                                  password=" ",
+                                  database=" ",
+                                  port=" ")
 
     cursor=myconnection.cursor()
     #plot1
@@ -488,11 +487,11 @@ def top_chart_trans_count(table_name):
 
 #sql plot3
 def top_chart_top_trans_count(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+myconnection=psycopg2.connect(host=" ",
+                                  user=" ",
+                                  password=" ",
+                                  database=" ",
+                                  port=" ")
 
     cursor=myconnection.cursor()
     #plot1
@@ -545,13 +544,13 @@ def top_chart_top_trans_count(table_name):
                            height= 800, width= 800, color_discrete_sequence=px.colors.sequential.Aggrnyl)
     st.plotly_chart(fig_count_3)
 
-#sql 
+#sql plot 4 
 def top_chart_registered_user(table_name,state):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+   myconnection=psycopg2.connect(host=" ",
+                                  user=" ",
+                                  password=" ",
+                                  database=" ",
+                                  port=" ")
 
     cursor=myconnection.cursor()
     #plot1
@@ -608,13 +607,13 @@ def top_chart_registered_user(table_name,state):
     st.plotly_chart(fig_amount_3)
 
 
-#sql 
+#sql plot 5
 def top_chart_appopens(table_name,state):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                                  user=" ",
+                                  password=" ",
+                                  database=" ",
+                                  port=" ")
 
     cursor=myconnection.cursor()
     #plot1
@@ -671,13 +670,13 @@ def top_chart_appopens(table_name,state):
     st.plotly_chart(fig_amount_3)
 
 
-#sql 
+#sql plot 6
 def top_chart_registered_userst(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                                  user=" ",
+                                  password=" ",
+                                  database=" ",
+                                  port=" ")
 
     cursor=myconnection.cursor()
     #plot1
