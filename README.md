@@ -36,7 +36,7 @@ git - https://git-scm.com/downloads
  pip install streamlit
  pip install plotly
 
-Installing and Importing the required Libraries:
+Importing the required Libraries:
   
 Firstly install all the required extensions/libraries/modules given above, if not installed
 
