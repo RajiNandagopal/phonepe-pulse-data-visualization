@@ -25,33 +25,31 @@ json -- Python Library that helps parse JSON into a Python dictionary/list, in s
 os -- Python Module that provides functions for interacting with the operating system
 
 Installation:
-
 To run this project, you need to install the following packages:
-
 git - https://git-scm.com/downloads
 
- pip install pandas
- pip install psycopg2
- pip install requests
- pip install streamlit
- pip install plotly
+•	pip install pandas 
+•	pip install psycopg2 
+•	pip install requests 
+•	pip install streamlit 
+•	pip install plotly
 
 Importing the required Libraries:
-  
+
 Firstly install all the required extensions/libraries/modules given above, if not installed
 
 pip install (name of the library/module)
 
 After installing the required libraries one need to import them in the program before one can use them.
 
-import streamlit as st
-import psycopg2
-import requests
-from streamlit_option_menu import option_menu
-import pandas as pd
-import plotly.express as px
-import os
-import json
+•	import streamlit as st 
+•	import psycopg2 
+•	import requests 
+•	from streamlit_option_menu import option_menu 
+•	import pandas as pd 
+•	import plotly.express as px 
+•	import os import json
+
 
 Features:
 
