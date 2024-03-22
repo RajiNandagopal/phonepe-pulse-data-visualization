@@ -6,18 +6,19 @@ import plotly.express as px
 import json
 import requests
 from PIL import Image
-
+import sys
+sys.setrecursionlimit(10000)
 
 
 
 #Dataframe creation
 
 #Sql connection
-myconnection=psycopg2.connect(host=" ",
-                              user=" ",
-                              password=" ",
-                              database=" ",
-                              port=" ")
+myconnection=psycopg2.connect(host="localhost",
+                              user="postgres",
+                              password="0726",
+                              database="phonepe_data",
+                              port="5432")
 
 cursor=myconnection.cursor()
 
@@ -367,11 +368,11 @@ def top_user_plot_2(df, state):
 
 #sql plot1 
 def top_chart_trans_amount(table_name):
-    myconnection=psycopg2.connect(host=" ",
-                                  user=" ",
-                                  password=" ",
-                                  database=" ",
-                                  port=" ")
+    myconnection=psycopg2.connect(host="localhost",
+                                  user="postgres",
+                                  password="0726",
+                                  database="phonepe_data",
+                                  port="5432")
 
     cursor=myconnection.cursor()
     #plot1
@@ -427,11 +428,11 @@ def top_chart_trans_amount(table_name):
 
 #sql plot2
 def top_chart_trans_count(table_name):
-   myconnection=psycopg2.connect(host=" ",
-                                  user=" ",
-                                  password=" ",
-                                  database=" ",
-                                  port=" ")
+    myconnection=psycopg2.connect(host="localhost",
+                                  user="postgres",
+                                  password="0726",
+                                  database="phonepe_data",
+                                  port="5432")
 
     cursor=myconnection.cursor()
     #plot1
@@ -487,11 +488,11 @@ def top_chart_trans_count(table_name):
 
 #sql plot3
 def top_chart_top_trans_count(table_name):
-myconnection=psycopg2.connect(host=" ",
-                                  user=" ",
-                                  password=" ",
-                                  database=" ",
-                                  port=" ")
+    myconnection=psycopg2.connect(host="localhost",
+                                  user="postgres",
+                                  password="0726",
+                                  database="phonepe_data",
+                                  port="5432")
 
     cursor=myconnection.cursor()
     #plot1
@@ -544,13 +545,13 @@ myconnection=psycopg2.connect(host=" ",
                            height= 800, width= 800, color_discrete_sequence=px.colors.sequential.Aggrnyl)
     st.plotly_chart(fig_count_3)
 
-#sql plot 4 
+#sql 
 def top_chart_registered_user(table_name,state):
-   myconnection=psycopg2.connect(host=" ",
-                                  user=" ",
-                                  password=" ",
-                                  database=" ",
-                                  port=" ")
+    myconnection=psycopg2.connect(host="localhost",
+                                  user="postgres",
+                                  password="0726",
+                                  database="phonepe_data",
+                                  port="5432")
 
     cursor=myconnection.cursor()
     #plot1
@@ -607,13 +608,13 @@ def top_chart_registered_user(table_name,state):
     st.plotly_chart(fig_amount_3)
 
 
-#sql plot 5
+#sql 
 def top_chart_appopens(table_name,state):
-    myconnection=psycopg2.connect(host=" ",
-                                  user=" ",
-                                  password=" ",
-                                  database=" ",
-                                  port=" ")
+    myconnection=psycopg2.connect(host="localhost",
+                                  user="postgres",
+                                  password="0726",
+                                  database="phonepe_data",
+                                  port="5432")
 
     cursor=myconnection.cursor()
     #plot1
@@ -670,13 +671,13 @@ def top_chart_appopens(table_name,state):
     st.plotly_chart(fig_amount_3)
 
 
-#sql plot 6
+#sql 
 def top_chart_registered_userst(table_name):
-    myconnection=psycopg2.connect(host=" ",
-                                  user=" ",
-                                  password=" ",
-                                  database=" ",
-                                  port=" ")
+    myconnection=psycopg2.connect(host="localhost",
+                                  user="postgres",
+                                  password="0726",
+                                  database="phonepe_data",
+                                  port="5432")
 
     cursor=myconnection.cursor()
     #plot1
@@ -728,6 +729,54 @@ def top_chart_registered_userst(table_name):
     fig_amount_3 = px.bar(df_3, y="state", x="registered_user", title="AVERAGE OF REGISTERED USER",hover_name ="state",orientation="h",
                            height= 800, width= 600, color_discrete_sequence=px.colors.sequential.Aggrnyl)
     st.plotly_chart(fig_amount_3)
+
+
+def brands_user_count(table_name):
+    brand= table_name[["Brands","User_Count"]]
+    brand1= brand.groupby("Brands")["User_Count"].sum().sort_values(ascending=False)
+    brand2= pd.DataFrame(brand1).reset_index()
+
+    fig_brands= px.pie(brand2, values= "User_Count", names= "Brands", color_discrete_sequence=px.colors.sequential.Agsunset,
+                       title= "Top Mobile Brands of Transaction_count")
+    st.plotly_chart(fig_brands)
+
+def map_trans_district(table_name):
+
+    htd= table_name[["District", "Transaction_amount"]]
+    htd1= htd.groupby("District")["Transaction_amount"].sum().sort_values(ascending=False)
+    htd2= pd.DataFrame(htd1).head(10).reset_index()
+
+    fig_htd= px.pie(htd2, values= "Transaction_amount", names= "District", title="TOP 10 DISTRICTS OF HIGHEST TRANSACTION AMOUNT",
+                    color_discrete_sequence=px.colors.sequential.Emrld_r)
+    st.plotly_chart(fig_htd)
+
+    htd= table_name[["District", "Transaction_amount"]]
+    htd1= htd.groupby("District")["Transaction_amount"].sum().sort_values(ascending=True)
+    htd2= pd.DataFrame(htd1).head(10).reset_index()
+
+    fig_htd_1= px.pie(htd2, values= "Transaction_amount", names= "District", title="TOP 10 DISTRICTS OF LOWEST TRANSACTION AMOUNT",
+                    color_discrete_sequence=px.colors.sequential.Agsunset)
+    st.plotly_chart(fig_htd_1)
+
+
+def aggre_trans_type_count(table_name):
+    htd= table_name[["Transaction_type", "Transaction_count"]]
+    htd1= htd.groupby("Transaction_type")["Transaction_count"].sum().sort_values(ascending=False)
+    htd2= pd.DataFrame(htd1).reset_index()
+
+    fig_htd= px.bar(htd2, x= "Transaction_count", y= "Transaction_type", title=" TRANSACTION TYPE OF HIGHEST TRANSACTION COUNT",
+                    color_discrete_sequence=px.colors.sequential.Agsunset)
+    st.plotly_chart(fig_htd)
+
+def aggre_trans_type(table_name):
+    htd= table_name[["Transaction_type", "Transaction_amount"]]
+    htd1= htd.groupby("Transaction_type")["Transaction_amount"].sum().sort_values(ascending=False)
+    htd2= pd.DataFrame(htd1).reset_index()
+
+    fig_htd= px.bar(htd2, x= "Transaction_amount", y= "Transaction_type", title=" TRANSACTION TYPE OF HIGHEST TRANSACTION AMOUNT",
+                    color_discrete_sequence=px.colors.sequential.Agsunset)
+    st.plotly_chart(fig_htd)
+
 
 
 
@@ -1007,12 +1056,16 @@ elif selected =="Top Charts":
                                                    "2.Transaction Amount and Count of Map Insurance",
                                                    "3.Transaction Amount and Count of Top Insurance",
                                                    "4.Transaction Amount and Count of Aggregated Transaction",
-                                                   "5.Transaction Amount and Count of Map Transaction",
-                                                   "6.Transaction Amount and Count of Top Transaction",
-                                                   "7.Transaction Count of Aggregated User",
-                                                   "8.Registered User of Map User",
-                                                   "9.App Opens of Map User",
-                                                   "10.Registered User of Top User",
+                                                   "5.Transaction Type of Highest transaction Count of Aggregated Transaction",
+                                                   "6.Transaction Type of Highest transaction Amount of Aggregated Transaction",
+                                                   "7.Transaction Amount and Count of Map Transaction",
+                                                   "8.Top 10 Districts With Highest and Lowest Transaction Amount",
+                                                   "9.Transaction Amount and Count of Top Transaction",
+                                                   "10.Transaction Count of Aggregated User",
+                                                   "11.Top Brands Of Mobiles Used",
+                                                   "12.Registered User of Map User",
+                                                   "13.App Opens of Map User",
+                                                   "14.Registered User of Top User",
                                                    ])
     
     if questions =="1.Transaction Amount and Count of Aggregated Insurance":
@@ -1051,7 +1104,22 @@ elif selected =="Top Charts":
         top_chart_trans_count("aggregated_transaction")
 
 
-    elif questions =="5.Transaction Amount and Count of Map Transaction":
+    elif questions =="5.Transaction Type of Highest transaction Count of Aggregated Transaction":
+
+        
+        st.subheader("TRANSACTION COUNT")
+        aggre_trans_type_count(Aggre_transaction)
+
+    
+    elif questions =="6.Transaction Type of Highest transaction Amount of Aggregated Transaction":
+
+        st.subheader("TRANSACTION AMOUNT")
+        aggre_trans_type(Aggre_transaction)
+
+        
+
+
+    elif questions =="7.Transaction Amount and Count of Map Transaction":
 
         st.subheader("TRANSACTION AMOUNT")
         top_chart_trans_amount("map_transaction")
@@ -1060,7 +1128,7 @@ elif selected =="Top Charts":
         top_chart_trans_count("map_transaction")
 
 
-    elif questions =="6.Transaction Amount and Count of Top Transaction":
+    elif questions =="9.Transaction Amount and Count of Top Transaction":
 
         st.subheader("TRANSACTION AMOUNT")
         top_chart_trans_amount("top_transaction")
@@ -1068,28 +1136,43 @@ elif selected =="Top Charts":
         st.subheader("TRANSACTION COUNT")
         top_chart_trans_count("top_transaction")
 
+    
+    elif questions =="8.Top 10 Districts With Highest and Lowest Transaction Amount":
 
-    elif questions =="7.Transaction Count of Aggregated User":
+        st.subheader("TRANSACTION AMOUNT")
+        map_trans_district(map_transaction)
+
+
+    elif questions =="10.Transaction Count of Aggregated User":
 
         st.subheader("TRANSACTION COUNT")
         top_chart_top_trans_count("aggregated_users")
 
     
-    elif questions =="8.Registered User of Map User":
+    elif questions =="11.Top Brands Of Mobiles Used":
+
+        st.subheader("User_Count")
+        brands_user_count(Aggre_users)
+
+    
+    elif questions =="12.Registered User of Map User":
         
         state = st.selectbox("Select The State", map_users["State"].unique())
         st.subheader("REGISTERED USER")
         top_chart_registered_user("map_users",state)
 
 
-    elif questions =="9.App Opens of Map User":
+    elif questions =="13.App Opens of Map User":
         
         state = st.selectbox("Select The State", map_users["State"].unique())
         st.subheader("APP OPENS")
         top_chart_appopens("map_users",state)
 
 
-    elif questions =="10.Registered User of Top User":
+    elif questions =="14.Registered User of Top User":
         
         st.subheader("REGISTERED USER")
         top_chart_registered_userst("map_users")
+
+
+st.success('🙏Thank you for your golden time. Exiting the application')
