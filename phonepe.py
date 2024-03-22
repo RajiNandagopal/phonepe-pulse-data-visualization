@@ -6,19 +6,18 @@ import plotly.express as px
 import json
 import requests
 from PIL import Image
-import sys
-sys.setrecursionlimit(10000)
+
 
 
 
 #Dataframe creation
 
 #Sql connection
-myconnection=psycopg2.connect(host="localhost",
-                              user="postgres",
-                              password="0726",
-                              database="phonepe_data",
-                              port="5432")
+myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
 cursor=myconnection.cursor()
 
@@ -368,13 +367,13 @@ def top_user_plot_2(df, state):
 
 #sql plot1 
 def top_chart_trans_amount(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
-    cursor=myconnection.cursor()
+cursor=myconnection.cursor()
     #plot1
     query1 =f'''select state, SUM(transaction_amount) AS transaction_amount 
                 FROM {table_name}
@@ -428,13 +427,13 @@ def top_chart_trans_amount(table_name):
 
 #sql plot2
 def top_chart_trans_count(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+   myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
-    cursor=myconnection.cursor()
+cursor=myconnection.cursor()
     #plot1
     query1 =f'''select state, SUM(transaction_count) AS transaction_count 
                 FROM {table_name}
@@ -488,13 +487,13 @@ def top_chart_trans_count(table_name):
 
 #sql plot3
 def top_chart_top_trans_count(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
-    cursor=myconnection.cursor()
+   cursor=myconnection.cursor()
     #plot1
     query1 =f'''select state, SUM(user_count) AS user_count 
                 FROM {table_name}
@@ -547,13 +546,13 @@ def top_chart_top_trans_count(table_name):
 
 #sql 
 def top_chart_registered_user(table_name,state):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
-    cursor=myconnection.cursor()
+cursor=myconnection.cursor()
     #plot1
     query1 =f'''select district, sum(registered_user) as registered_user
                 from  {table_name}
@@ -610,13 +609,13 @@ def top_chart_registered_user(table_name,state):
 
 #sql 
 def top_chart_appopens(table_name,state):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
-    cursor=myconnection.cursor()
+cursor=myconnection.cursor()
     #plot1
     query1 =f'''select district, sum(appopens) as appopens
                 from  {table_name}
@@ -673,13 +672,13 @@ def top_chart_appopens(table_name,state):
 
 #sql 
 def top_chart_registered_userst(table_name):
-    myconnection=psycopg2.connect(host="localhost",
-                                  user="postgres",
-                                  password="0726",
-                                  database="phonepe_data",
-                                  port="5432")
+    myconnection=psycopg2.connect(host=" ",
+                              user=" ",
+                              password=" ",
+                              database=" ",
+                              port=" ")
 
-    cursor=myconnection.cursor()
+cursor=myconnection.cursor()
     #plot1
     query1 =f'''select state, sum(registered_user) as registered_user
                 from {table_name}
